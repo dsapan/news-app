@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>News App </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -21,12 +21,12 @@
  		<li class="active"><a href="#">Home</a></li>
   </ul>
    <div class="col-sm-3 col-md-3 pull-right">
-    <form class="navbar-form" method="POST">
+    <form class="navbar-form" method="POST" action={% url 'subscribe' %}>
     	{% csrf_token %}
 		<div class="input-group">
-        		<input type="text" class="form-control" placeholder=" Enter Email " name="email">
+        		<input type="text" class="form-control" placeholder=" Enter Email " name="em">
         		<div class="input-group-btn">
-        				<button class="btn btn-default" type="submit">Subscribe</button>
+        				<button class="btn btn-default" name="subtn" type="submit">Subscribe</button>
         		</div>
     	</div>
     </form>
@@ -46,6 +46,14 @@
 			<div class="input-group-append"><button class="btn btn-success" type="submit" > <b>Submit</b></button></div>
 
 		</form>
+		{% if messages %}
+			{% for message in messages %}
+				{% if message.tags %}
+					<script>alert("{{ message }}")</script> 
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		
     {% if info %}
       <h2> News From {{ src }} </h2>
       {% for i in info %}
@@ -55,7 +63,7 @@
         <hr>
         
         
-      {% endfor %}
+     {% endfor %}
     {% endif %}
 
 
